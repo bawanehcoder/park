@@ -3,8 +3,6 @@
 namespace App\Filament\Resources\Panel;
 
 use App\Filament\Resources\Panel\EmployeeResource\Pages;
-use App\Filament\Resources\Panel\EmployeeResource\RelationManagers;
-use App\Models\Employee;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
@@ -14,21 +12,35 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class EmployeeResource extends Resource
 {
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
-    protected static ?string $navigationLabel = 'Employees';
-
-    protected static ?string $navigationGroup = 'User Management';
-
+    protected static ?string $navigationLabel = ('Employees');
+    protected static ?string $navigationGroup = ('User Management');
+    
     protected static ?int $navigationSort = 16;
+    public static function getModelLabel(): string
+    {
+        return __('Employees');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Employee'); 
+    }
+
+    public static function getNavigationLabel(): string
+{
+    return __('Employees'); // تم إغلاق القوس هنا
+}
     public static function getEloquentQuery(): Builder
     {
-        return auth()->user()->hasRole('super_admin') ? static::getModel()::query()->whereHas('roles') : static::getModel()::query()->where('company_id',auth()->user()->company_num)->whereHas('roles');
+        return auth()->user()->hasRole('super_admin') 
+            ? static::getModel()::query()->whereHas('roles') 
+            : static::getModel()::query()->where('company_id', auth()->user()->company_num)->whereHas('roles');
     }
 
     public static function form(Form $form): Form
@@ -36,25 +48,34 @@ class EmployeeResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
+                    ->label(__('Name'))
                     ->required()
                     ->maxLength(255),
+
                 TextInput::make('email')
+                    ->label(__('Email'))
                     ->email()
                     ->required(),
+
                 TextInput::make('password')
+                    ->label(__('Password'))
                     ->password()
-                    ->confirmed() // Add confirmation validation
-                    ->maxLength(255)
-                    ->label('Password'), // Optional: Add a label for clarity
+                    ->confirmed()
+                    ->maxLength(255),
+
                 TextInput::make('password_confirmation')
+                    ->label(__('Confirm Password'))
                     ->password()
                     ->maxLength(255)
-                    ->label('Confirm Password')
                     ->visible(fn($livewire) => $livewire instanceof \Filament\Resources\Pages\CreateRecord || $livewire instanceof \Filament\Resources\Pages\EditRecord),
+
                 TextInput::make('phone')
+                    ->label(__('Phone'))
                     ->tel()
                     ->maxLength(255),
+
                 Forms\Components\Select::make('roles')
+                    ->label(__('Roles'))
                     ->relationship('roles', 'name')
                     ->preload()
                     ->searchable(),
@@ -65,16 +86,12 @@ class EmployeeResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('phone'),
-                TextColumn::make('roles.name')->badge(),
-                TextColumn::make('company_name'),
-                // TextColumn::make('company_id'),
-
+                TextColumn::make('name')->label(__('Name')),
+                TextColumn::make('phone')->label(__('Phone')),
+                TextColumn::make('roles.name')->badge()->label(__('Roles')),
+                TextColumn::make('company_name')->label(__('Company Name')),
             ])
-            ->filters([
-                //
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
@@ -87,9 +104,7 @@ class EmployeeResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array
@@ -99,5 +114,5 @@ class EmployeeResource extends Resource
             'create' => Pages\CreateEmployee::route('/create'),
             'edit' => Pages\EditEmployee::route('/{record}/edit'),
         ];
-    }
+    }  
 }

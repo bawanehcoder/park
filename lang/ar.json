@@ -1,25 +1,127 @@
 {
+    "crud": {
+        "cars": {
+            "itemTitle": "السيارة",
+            "collectionTitle": "السيارات"
+        },
+        "parkings": {
+            "itemTitle": "موقف السيارة",
+            "collectionTitle": "مواقف السيارات"
+        },
+        "employees": {
+            "itemTitle": "الموظف",
+            "collectionTitle": "الموظفون"
+        }
+    },
+    "Number": "الرقم",
+    "Brand": "العلامة التجارية",
+    "Model": "الموديل",
+    "Confirm Password": "تأكيد كلمة المرور",
+    "Company Name": "اسم الشركة",
+    "Search": "بحث",
+    "Save": "حفظ",
+    "Cancel": "إلغاء",
+    "Color": "اللون",
+    "Code": "الكود",
+    "Car_Brand.Name": "اسم العلامة التجارية",
+    "Car_Model.Name": "اسم الموديل",
+    "User.Name": "اسم المستخدم",
     "Parkings Count": "عدد مواقف السيارات",
     "Companies Count": "عدد الشركات",
     "Employees Count": "عدد الموظفين",
     "Booked Cars Count": "عدد السيارات المحجوزة",
     "Chart": "الرسم البياني",
     "Latest Booking": "أحدث حجز",
-    "Code": "الرمز",
     "Parking": "موقف السيارات",
     "Company": "الشركة",
     "Supervisor": "المشرف",
     "Car": "السيارة",
     "Employee": "الموظف",
     "Duration": "المدة",
-    "Status": "الحالة",
+   
     "Name": "الاسم",
     "Slot": "الموقف",
-    "Number": "الرقم",
-    "Brand": "العلامة التجارية",
-    "Model": "الموديل",
     "Owner": "المالك",
-    "Image":"الشعار",
-    "Address":"العنوان",
-    "parkings":"المواقف"
+    "Image": "الشعار",
+    "Address": "العنوان",
+    "parkings": "المواقف",
+    "User_management": "إدارة المستخدمين",
+    "Email": "البريد الإلكتروني",
+    "Password": "كلمة المرور",
+    "Password_Confirmation": "تأكيد كلمة المرور",
+    "Phone": "رقم الهاتف",
+    "Roles": "الأدوار",
+    "Transactionable.Id": "رقم المعاملة",
+    "Transactionable_Type": "نوع المعاملة",
+    "Amount": "المبلغ",
+    "Created_At": "تاريخ الإنشاء",
+    "Status": "الحالة",
+    "Company.Name": "اسم الشركة",
+    "Company_Name": "اسم الشركة",
+    "Employees": "الموظفون",
+    "User Management": "إدارة المستخدمين",
+    "Actions": "الإجراءات",
+    "Edit": "تعديل",
+    "Delete": "حذف",
+    "Create": "إنشاء",
+    "actions": {
+        "edit": "تعديل",
+        "delete": "حذف"
+    },
+    "messages": {
+        "Confirm_delete": "هل أنت متأكد أنك تريد حذف هذا العنصر؟"
+    },
+    "tables": {
+        "name": "الاسم",
+        "Company_Name": "اسم الشركة",
+        "supervisor_name": "اسم المشرف",
+        "total_capacity": "السعة الإجمالية",
+        "employees_count": "عدد الموظفين"
+    },
+    "Roles.Name": "أدوار.اسم",
+    "buttons": {
+        "create": "إنشاء",
+        "edit": "تعديل",
+        "delete": "حذف",
+        "view": "عرض"
+    },
+    "forms": {
+        "name": "الاسم",
+        "address": "العنوان",
+        "price_per_hour": "السعر لكل ساعة",
+        "company_id": "شركة",
+        "supervisor_id": "مشرف"
+    },
+    "User_id": "المستخدم",
+    "User":"مستخدم",
+    "Users":"مستخدمين",
+     "Transaction": "معاملة",
+  "Transactions": "المعاملات",
+  "Car_Id": "معرف السيارة",
+  "Car Number": "رقم السيارة",
+  "Parking_Id": "معرف الموقف",
+ 
+  "company_id": "معرف الشركة",
+  
+  
+  "Start": "البداية",
+  "End": "النهاية",
+  "Slot_Id": "معرف الفتحة",
+
+  "Parking.Name": "اسم الموقف",
+  
+  "Parking.Supervisor.Name": "اسم المشرف",
+  "Car.Number": "رقم السيارة",
+  "Employee.Name": "اسم الموظف",
+  
+  "pending": "قيد الانتظار",
+  "cancelled": "ملغى",
+  "confirmed": "مؤكد",
+  "parked": "راكِن",
+  "completed": "مكتمل",
+  "Change_Status": "تغيير الحالة",
+  "Select a status": "اختر الحالة",
+  "Booking Status": "حالة الحجز",
+  "Slot number": "رقم الفتحة"
+   
 }

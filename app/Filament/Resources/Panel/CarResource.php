@@ -57,12 +57,15 @@ class CarResource extends Resource
 
 
                     TextInput::make('number')
+                    ->label(__('Number'))
                         ->required()
                         ->numeric()
                         ->step(1)
                         ->autofocus(),
 
                     Select::make('user_id')
+                    ->label(__('User_id'))
+
                         ->required()
                         ->relationship('user', 'name')
                         ->searchable()
@@ -70,6 +73,8 @@ class CarResource extends Resource
                         ->native(false),
 
                     Select::make('brand')
+                    ->label(__('Brand'))
+
                         ->required()
                         ->relationship('car_brand', 'name')
                         ->searchable()
@@ -81,6 +86,7 @@ class CarResource extends Resource
                         }),
 
                     Select::make('model')
+                    ->label(__('Model'))
                         ->required()
                         ->relationship('car_model', 'name', function ($query, $get) {
                             if ($brandId = $get('brand')) {
@@ -93,6 +99,7 @@ class CarResource extends Resource
                         ->reactive(),
 
                     ColorPicker::make('color')
+                    ->label(__('Color'))
                         ->required(),
 
 
@@ -109,18 +116,24 @@ class CarResource extends Resource
             ->poll('60s')
             ->columns([
                 TextColumn::make('code')
+                ->label(__('Code'))
                 ->getStateUsing(function ($record) {
                     return new HtmlString('<div style="width:50px">'. $record->code .'</div>');
                 }),
 
-                TextColumn::make('number'),
+                TextColumn::make('number')
+                ->label(__('number')),
 
-                TextColumn::make('car_brand.name')->limit(255),
-                TextColumn::make('car_model.name')->limit(255),
+                TextColumn::make('car_brand.name')->limit(255)
+                ->label(__('Car_Brand.Name')),
 
-                ColorColumn::make('color'),
+                TextColumn::make('car_model.name')->limit(255)
+                ->label(__('Car_Model.Name')),
 
-                TextColumn::make('user.name'),
+                ColorColumn::make('color')
+                ->label(__('Color')),
+                TextColumn::make('user.name')
+                ->label(__('User.Name')),
 
                 
             ])

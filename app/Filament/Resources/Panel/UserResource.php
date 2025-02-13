@@ -27,6 +27,25 @@ class UserResource extends Resource
 
     protected static ?int $navigationSort = 15;
 
+
+    /********************** */
+    public static function getModelLabel(): string
+    {
+        return __('User');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('User'); 
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Users');// with s
+    }
+    /********************** */
+
+
     public static function getEloquentQuery(): Builder
     {
         return auth()->user()->hasRole('super_admin') ? static::getModel()::query()->doesntHave('roles') : static::getModel()::query()->where('company_id', auth()->user()->company_num)->doesntHave('roles');
@@ -38,26 +57,36 @@ class UserResource extends Resource
             ->schema([
                 Section::make()->schema([
                     TextInput::make('name')
+                    ->label(__('Name'))
                         ->required()
                         ->maxLength(255),
                     TextInput::make('email')
+                    ->label(__('Email'))
+
                         ->email()
                         ->required(),
                     TextInput::make('password')
+                    ->label(__('Password'))
                         ->password()
                         ->confirmed() // Add confirmation validation
-                        ->maxLength(255)
-                        ->label('Password'), // Optional: Add a label for clarity
+                        ->maxLength(255),
+                        // ->label('Password'), 
                     TextInput::make('password_confirmation')
+                    ->label(__('Password_confirmation'))
+
                         ->password()
                         ->maxLength(255)
-                        ->label('Confirm Password')
+                        ->label(__('Confirm Password'))
                         ->visible(fn($livewire) => $livewire instanceof \Filament\Resources\Pages\CreateRecord || $livewire instanceof \Filament\Resources\Pages\EditRecord),
                     TextInput::make('phone')
                         ->tel()
                         ->maxLength(255),
                     Forms\Components\Select::make('roles')
+                    ->label(__('Roles'))
+
+
                         ->relationship('roles', 'name')
+                        
                         ->preload()
                         ->searchable(),
                 ])->columns(2)
@@ -68,10 +97,18 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('phone'),
-                TextColumn::make('roles.name')->badge(),
-                TextColumn::make('company_name'),
+                TextColumn::make('name')
+                ->label(__('Name')),
+
+                TextColumn::make('phone')
+                ->label(__('Phone')),
+
+                TextColumn::make('roles.name')->badge()
+                ->label(__('Roles.Name')),
+
+                TextColumn::make('company_name')
+                ->label(__('Company_Name')),
+
                 // TextColumn::make('company_id'),
 
             ])

@@ -88,8 +88,9 @@ class BookingResource extends Resource
                 ->schema([
                     Grid::make(['default' => 4])->schema([
                         Select::make('car_id')
+                        ->label(__('Car_Id'))
                             ->required()
-                            ->label('Car Number')
+                            ->label(__('Car Number'))
                             ->relationship('car', 'number')
                             ->searchable()
                             ->preload()
@@ -167,8 +168,11 @@ class BookingResource extends Resource
                 ->schema([
                     Grid::make(['default' => 3])->schema([
                         Select::make('parking_id')
+                        ->label(__('Parking_Id'))
+
                             ->required()
                             ->label('Name')
+                            ->label(__('Name'))
                             ->relationship('parking', 'name')
                             ->searchable()
                             ->preload()
@@ -187,14 +191,16 @@ class BookingResource extends Resource
                                 }
                             }),
                         // Hidden::make('supervisor_id'),
-                        Hidden::make('company_id'),
+                        Hidden::make('company_id')
+                        ->label(__('company_id')),
                         TextInput::make('supervisor')
-                        ->label('Supervisor')
+                        ->label(__('Supervisor'))
                         ->disabled(),
 
                         Select::make('company')
+                        ->label(__('Company'))
                             ->required()
-                            ->label('Company')
+                            ->label(__('Company'))
                             ->relationship('company', 'name')
                             ->searchable()
                             ->preload()
@@ -203,14 +209,19 @@ class BookingResource extends Resource
 
 
                         DateTimePicker::make('start')
+                        ->label(__('Start'))
                             ->rules(['date'])
                             ->disabled()
                             ->native(false),
                         DateTimePicker::make('end')
+                        ->label(__('End'))
+
                             ->rules(['date'])
                             ->disabled()
                             ->native(false),
                         Select::make('slot_id')
+                        ->label(__('Slot_Id'))
+
                             ->disabled()
                             ->label('Slot number')
                             ->relationship('slot', 'id', function ($query, $get) {
@@ -236,17 +247,26 @@ class BookingResource extends Resource
             ->columns([
                 // TextColumn::make('id')->sortable(),
                 TextColumn::make('code')
+                ->label(__('Code'))
                     ->getStateUsing(function ($record) {
                         return new HtmlString($record->code);
                     }),
                 TextColumn::make('parking.name')->sortable()
+                ->label(__('Parking.Name'))
+
                 ->html()
                 ->getStateUsing(function ($record) {
                     return 'Name : ' . $record->parking->name .'<br/>' .  'Slot : ' . $record?->slot?->id;
                 }),
-                TextColumn::make('company.name')->sortable(),
-                TextColumn::make('parking.supervisor.name')->sortable(),
+                TextColumn::make('company.name')->sortable()
+                ->label(__('Company.Name')),
+
+                TextColumn::make('parking.supervisor.name')->sortable()
+                ->label(__('Parking.Supervisor.Name')),
+
                 TextColumn::make('car.number')->sortable()
+                ->label(__('Car.Number'))
+
                 ->html()
                 ->getStateUsing(function ($record) {
                     return 'Number : ' . $record->car->number 
@@ -254,14 +274,17 @@ class BookingResource extends Resource
                     .'<br/>' .  'Model : ' . $record->car->car_model-> name
                     .'<br/>' .  'Owner : ' . $record->car->user-> name;
                 }),
-                TextColumn::make('employee.name')->sortable(),
-                TextColumn::make('duration')->sortable(),
+                TextColumn::make('employee.name')->sortable()
+                ->label(__('Employee.Name')),
+                TextColumn::make('duration')->sortable()
+                ->label(__('Duration')),
                 TextColumn::make('status')->badge()->colors([
-                    'warning' => 'pending',
-                    'danger' => 'cancelled',
-                    'primary' => 'confirmed',
-                    'info' => 'parked',
-                    'success' => 'completed',
+                    'warning' => __('pending'),
+                    'danger' => __('cancelled'),
+                    'primary' => __('confirmed'),
+                    'info' => __('parked'),
+                    'success' => __('completed'),
+                
                 ])
 
 
@@ -271,6 +294,7 @@ class BookingResource extends Resource
                 // Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
                 Action::make('change_status')
+                ->label(__('Change_Status'))
                 ->iconButton()
                 ->icon('heroicon-m-arrow-path')
                 ->tooltip('Change Status')

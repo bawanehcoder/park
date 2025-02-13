@@ -24,7 +24,20 @@ class TransactionResource extends Resource
     protected static ?string $navigationGroup = 'Payments';
 
     protected static ?int $navigationSort = 20;
+    public static function getModelLabel(): string
+    {
+        return __('Transaction');
+    }
 
+    public static function getPluralModelLabel(): string
+    {
+        return __('Transaction'); 
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Transactions');// with s
+    }
 
 
     public static function getEloquentQuery(): Builder
@@ -44,16 +57,27 @@ class TransactionResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('transactionable.id'),
-                TextColumn::make('transactionable_type'),
+                TextColumn::make('transactionable.id')
+                ->label(__(key: 'Transactionable.Id')),
+                TextColumn::make('transactionable_type')
+                ->label(__(key: 'Transactionable_Type')),
+
                 TextColumn::make('amount')
+                ->label(__(key: 'Amount'))
+
                 ->summarize([
                     Tables\Columns\Summarizers\Sum::make()
                         ->money(),
                 ]),
-                TextColumn::make('created_at'),
-                TextColumn::make('status')->badge(),
-                TextColumn::make('company.name'),
+                TextColumn::make('created_at')
+                ->label(__(key: 'Created_At')),
+
+                TextColumn::make('status')->badge()
+                ->label(__(key: 'Status')),
+
+                TextColumn::make('company.name')
+                ->label(__(key: 'Company.Name')),
+
 
             ])
             ->filters([
